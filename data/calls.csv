@@ -19,4 +19,3 @@ timestamp,model,promptTokens,completionTokens,thoughtTokens,totalTokens,costUsd,
 2026-11-06T19:18:46.764Z,gemini-3.5-flash-lite,19,64,0,83,0.000166,929,ok
 2026-11-06T19:18:52.452Z,gemini-3.5-flash-lite,23,234,0,257,0.000592,1684,ok
 2026-11-06T19:18:57.989Z,gemini-3.5-flash-lite,19,170,0,189,0.000431,1525,ok
-2026-11-06T19:47:50.636Z,gemini-3.5-flash,0,0,0,0,0.000000,7335,error

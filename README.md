@@ -54,7 +54,7 @@ npm install
 # 3. Valide o ambiente
 npm run smoke        # lista os modelos disponíveis para sua conta
 npm run test:meter   # canário: 1 chamada medida — confirma chave, rede e medição
-npm run test:error   # valida a classificação de erros
+npm run test:errors   # valida a classificação de erros
 
 # 4. Rode o experimento (~3-10 min)
 npm run batch        # 2 modelos × 10 chamadas → data/calls.csv
