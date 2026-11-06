@@ -5,10 +5,9 @@ node_modules/
 .env
 .env*
 
-#Logs && Data
-data/
-*.Logs
+# LOGS
+*.logs
 
-#System
+# SYSTEM
 .DS_Store
 Thumbs.db
