@@ -1,7 +1,7 @@
 import { meteredChat } from "../src/meter.js";
 import { logCall } from "../src/logger.js";
 
-const MODELS = ['gemini-3.8-flash', 'gemini-2.5-pro'];
+const MODELS = ['gemini-3.5-flash', 'gemini-3.5-flash-lite'];
 const PROMPTS = [
     "Diga olá em 3 palavras.",
     "Explique o que é um token de LLM em uma frase.",
