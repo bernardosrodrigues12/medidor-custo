@@ -1,4 +1,3 @@
-//TODO: src/smoke-test.ts — temporary, delete after validation
 import { llm } from "../src/client.js";
 
 async function main() {

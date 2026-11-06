@@ -1,4 +1,3 @@
-//TODO: scripts/api-key-test.ts - temporary, delete after validation
 import "dotenv/config";
 
 async function main() {
