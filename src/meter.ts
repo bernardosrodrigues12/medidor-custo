@@ -6,6 +6,7 @@ export interface MeteredCall {
   model: string;
   promptTokens: number;
   completionTokens: number;
+  thougthTokens: number;
   totalTokens: number;
   costUsd: number;
   latencyMs: number;
@@ -14,8 +15,10 @@ export interface MeteredCall {
   errorMessage?: string;
 }
 
+
 const PRICING: Record<string, { input: number; output: number }> = {
-  "gemini-3.8-flash": { input: 0.75, output: 3.0 },
+  "gemini-3.5-flash": { input: 1.50, output: 9.00 },
+  "gemini-3.5-flash-lite": { input: 0.30, output: 2.50 },
   
 };
 
@@ -47,14 +50,15 @@ function errorMessageOf(err: unknown): string {
 export async function meteredChat(model: string, prompt: string): Promise<MeteredCall> {
   const start = performance.now();
   let lastError: unknown;
-
+  
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
       const response = await llm.models.generateContent({ model, contents: prompt });
-
+      
       const usage = response.usageMetadata;
       const promptTokens = usage?.promptTokenCount;
       const completionTokens = usage?.candidatesTokenCount;
+      const thougthTokens = usage?.thoughtsTokenCount ?? 0;
 
       if (promptTokens === undefined || completionTokens === undefined) {
         const usageErr = new Error("Gemini returned incomplete usage data") as Error & { status: string };
@@ -66,7 +70,8 @@ export async function meteredChat(model: string, prompt: string): Promise<Metere
         model,
         promptTokens,
         completionTokens,
-        totalTokens: usage?.totalTokenCount ?? promptTokens + completionTokens,
+        thougthTokens,
+        totalTokens: usage?.totalTokenCount ?? promptTokens + completionTokens + thougthTokens,
         costUsd: estimateCost(model, { promptTokens, completionTokens }),
         latencyMs: Math.round(performance.now() - start),
         status: "ok",
@@ -87,6 +92,7 @@ export async function meteredChat(model: string, prompt: string): Promise<Metere
     promptTokens: 0,
     completionTokens: 0,
     totalTokens: 0,
+    thougthTokens: 0,
     costUsd: 0,
     latencyMs: Math.round(performance.now() - start),
     status: "error",
