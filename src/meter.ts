@@ -72,7 +72,7 @@ export async function meteredChat(model: string, prompt: string): Promise<Metere
         completionTokens,
         thougthTokens,
         totalTokens: usage?.totalTokenCount ?? promptTokens + completionTokens + thougthTokens,
-        costUsd: estimateCost(model, { promptTokens, completionTokens }),
+        costUsd: estimateCost(model, { promptTokens, completionTokens: completionTokens + thougthTokens }),
         latencyMs: Math.round(performance.now() - start),
         status: "ok",
       };
