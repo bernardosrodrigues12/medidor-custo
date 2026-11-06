@@ -3,7 +3,7 @@ import { dirname } from "node:path";
 import type { MeteredCall } from "./meter.js";
 
 const CSV_PATH = 'data/calls.csv';
-const HEADER = 'timestamp,model,promptTokens,completionTokens,totalTokens,costUsd,latencyMs,status,errorCode,errorMessage';
+const HEADER = 'timestamp,model,promptTokens,completionTokens,thougthTokens,totalTokens,costUsd,latencyMs,status,errorCode,errorMessage';
 
 function ensureFile(): void {
     if (existsSync(CSV_PATH)) return;
@@ -18,11 +18,12 @@ export function logCall(call: MeteredCall): void {
         call.model,
         call.promptTokens,
         call.completionTokens,
+        call.thougthTokens,
         call.totalTokens,
         call.costUsd.toFixed(6),
         call.latencyMs,
         call.status,    
     ].join(',');
-    
+
     appendFileSync(CSV_PATH, row + '\n')
 }
