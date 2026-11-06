@@ -3,7 +3,7 @@ import { dirname } from "node:path";
 import type { MeteredCall } from "./meter.js";
 
 const CSV_PATH = 'data/calls.csv';
-const HEADER = 'timestamp,model,promptTokens,completionTokens,thougthTokens,totalTokens,costUsd,latencyMs,status,errorCode,errorMessage';
+const HEADER = 'timestamp,model,promptTokens,completionTokens,thoughtTokens,totalTokens,costUsd,latencyMs,status,errorCode,errorMessage';
 
 function ensureFile(): void {
     if (existsSync(CSV_PATH)) return;

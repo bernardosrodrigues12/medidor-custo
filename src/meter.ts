@@ -29,7 +29,7 @@ function estimateCost(model: string, usage: { promptTokens: number; completionTo
          (usage.completionTokens / 1_000_000) * price.output;
 }
 
-const RETRYABLE_STATUSES = new Set([429, 500, 503]); // transientes
+const RETRYABLE_STATUSES = new Set([429, 500, 503]); 
 const MAX_RETRIES = 2;
 const BASE_DELAY_MS = 2_000;
 
@@ -44,7 +44,7 @@ function errorCodeOf(err: unknown): string {
 
 function errorMessageOf(err: unknown): string {
   const msg = (err as Error)?.message ?? String(err);
-  return msg.replace(/[",\n\r]/g, " ").slice(0, 120); // sanitiza p/ CSV
+  return msg.replace(/[",\n\r]/g, " ").slice(0, 120); 
 }
 
 export async function meteredChat(model: string, prompt: string): Promise<MeteredCall> {
@@ -81,7 +81,7 @@ export async function meteredChat(model: string, prompt: string): Promise<Metere
       const retryable = RETRYABLE_STATUSES.has(Number(errorCodeOf(err)));
       if (!retryable || attempt === MAX_RETRIES) break;
 
-      const waitMs = BASE_DELAY_MS * 2 ** attempt; // 2s → 4s
+      const waitMs = BASE_DELAY_MS * 2 ** attempt; 
       console.warn(`[meter] status ${errorCodeOf(err)} transiente — retry ${attempt + 1}/${MAX_RETRIES} em ${waitMs}ms`);
       await delay(waitMs);
     }
