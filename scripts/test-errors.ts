@@ -1,4 +1,4 @@
-// src/test-error.ts — temporary
+//TODO: src/test-error.ts — temporary, delete after validation
 import { meteredChat } from "../src/meter.js";
 
 async function main() {
